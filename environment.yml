@@ -1,7 +1,8 @@
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - r-base=4.4.3
+  - r-base=4.4.2
   - r-base64enc
   - r-base64url
   - r-bh
