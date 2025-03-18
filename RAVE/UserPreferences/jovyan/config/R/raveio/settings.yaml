@@ -1,4 +1,4 @@
-ravedash_session_root: /Users/dipterix/Dropbox (Personal)/projects/rave-binder/RAVE/Runtime/sessions/jovyan
+ravedash_session_root: ~/RAVE/Runtime/sessions/jovyan
 threeBrain_template_subject: N27
 py_virtualenv: ''
 py3_path: ''
@@ -21,8 +21,8 @@ delay_input: 20.0
 module_lookup_file: ~/rave_modules/modules.csv
 module_root_dir: ~/rave_modules/
 file_structure: native
-bids_data_dir: /Users/dipterix/rave_data/bids_dir
-data_dir: /Users/dipterix/Dropbox (Personal)/projects/rave-binder/RAVE/rave_data/data_dir
-raw_data_dir: /Users/dipterix/Dropbox (Personal)/projects/rave-binder/RAVE/rave_data/raw_dir
+bids_data_dir: ~/RAVE/rave_data/bids_dir
+data_dir: ~/RAVE/rave_data/data_dir
+raw_data_dir: ~/RAVE/rave_data/raw_dir
 verbose_level: DEBUG
-tensor_temp_path: /Users/dipterix/Dropbox (Personal)/projects/rave-binder/RAVE/Runtime/shared
+tensor_temp_path: ~/RAVE/Runtime/shared

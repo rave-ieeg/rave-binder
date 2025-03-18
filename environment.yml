@@ -90,3 +90,12 @@ dependencies:
   - r-lmtest
   - r-edfreader
   - r-logger
+  - r-shinyfiles
+  - r-shinyjs
+  - r-signal
+  - r-shinydashboard
+  - r-fftwtools
+  - r-estimability
+  - r-lmertest
+  - r-emmeans
+  - r-lme4
