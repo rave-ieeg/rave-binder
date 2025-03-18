@@ -2,6 +2,16 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - h5py
+  - mat73
+  - numpy
+  - scipy
+  - pandas
+  - cython
+  - pkg-config
+  - fftw
+  - cmake
+  - dcm2niix
   - r-base=4.4.2
   - r-base64enc
   - r-base64url
@@ -78,3 +88,5 @@ dependencies:
   - r-rdpack
   - r-reformulas
   - r-lmtest
+  - r-edfreader
+  - r-logger
