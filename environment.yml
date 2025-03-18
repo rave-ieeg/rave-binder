@@ -73,8 +73,8 @@ dependencies:
   - r-crosstalk
   - r-shinywidgets
   - r-shinyvalidate
-  - r-dt,
-  - r-rbibutils,
+  - r-dt
+  - r-rbibutils
   - r-rdpack
   - r-reformulas
   - r-lmtest
