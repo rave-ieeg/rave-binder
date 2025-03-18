@@ -12,6 +12,9 @@ $rscript --no-restore --no-save -e "install.packages(\"ieegio\",repos=\"https://
 $rscript --no-restore --no-save -e "install.packages(\"ravepipeline\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
 $rscript --no-restore --no-save -e "install.packages(\"raveio\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
 $rscript --no-restore --no-save -e "install.packages(\"ravedash\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"rave\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"rutabaga\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"ravebuiltins\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
 
 $rscript -e 'threeBrain::threebrain_finalize_installation(upgrade = "config-only", async = FALSE)'
 $rscript -e 'ravepipeline::ravepipeline_finalize_installation(upgrade = "config-only", async = FALSE)'

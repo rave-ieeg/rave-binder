@@ -69,3 +69,12 @@ dependencies:
   - r-xopen
   - r-xtable
   - r-yaml
+  - r-lazyeval
+  - r-crosstalk
+  - r-shinywidgets
+  - r-shinyvalidate
+  - r-dt,
+  - r-rbibutils,
+  - r-rdpack
+  - r-reformulas
+  - r-lmtest
