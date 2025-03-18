@@ -98,4 +98,5 @@ dependencies:
   - r-estimability
   - r-lmertest
   - r-emmeans
+  - r-matrix
   - r-lme4

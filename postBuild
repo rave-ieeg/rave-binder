@@ -2,5 +2,5 @@
 
 /srv/conda/envs/notebook/bin/Rscript "finalize.R"
 
-rm -rf /tmp/*
+rm -rf /tmp/Rtmp*
 
