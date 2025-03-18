@@ -1,7 +1,9 @@
 libpath="/srv/conda/envs/notebook/lib/R/library"
 
-repos <- getOption("repos")
-repos[["rave-ieeg"]] <- "https://rave-ieeg.r-universe.dev"
+repos <- c(
+  "CRAN" = "https://cloud.r-project.org/",
+  "rave-ieeg" = "https://rave-ieeg.r-universe.dev"
+)
 
 install.packages("ravemanager", repos = repos, lib = libpath)
 install.packages("threeBrain", repos = repos, lib = libpath)
