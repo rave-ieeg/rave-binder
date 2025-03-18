@@ -3,15 +3,15 @@
 rscript="/srv/conda/envs/notebook/bin/R"
 libpath="/srv/conda/envs/notebook/lib/R/library"
 
-$rscript -e --no-restore --no-save "install.packages(\"ravemanager\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"threeBrain\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"readNSx\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"rpymat\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"rpyANTs\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"ieegio\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"ravepipeline\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"raveio\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
-$rscript -e --no-restore --no-save "install.packages(\"ravedash\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"ravemanager\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"threeBrain\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"readNSx\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"rpymat\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"rpyANTs\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"ieegio\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"ravepipeline\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"raveio\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
+$rscript --no-restore --no-save -e "install.packages(\"ravedash\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
 
 $rscript -e 'threeBrain::threebrain_finalize_installation(upgrade = "config-only", async = FALSE)'
 $rscript -e 'ravepipeline::ravepipeline_finalize_installation(upgrade = "config-only", async = FALSE)'
