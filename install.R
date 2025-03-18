@@ -1,5 +1,55 @@
-install.packages("tidyverse")
-install.packages("rmarkdown")
-install.packages("httr")
-install.packages("shinydashboard")
-install.packages("leaflet")
+install.packages(c(
+  "abind", "askpass", "assertthat", "attachment", "backports",
+  "base64enc", "base64url", "bezier", "BH", "bidsr", "bit", "bit64",
+  "bitops", "bmp", "brew", "brio", "broom", "bslib", "cachem",
+  "callr", "car", "carData", "checkhelper", "checkmate", "circular",
+  "classInt", "cli", "clipr", "clisymbols", "clustermq", "colorRamps",
+  "colorspace", "commonmark", "covr", "cowplot", "cpp11", "crayon",
+  "credentials", "crosstalk", "curl", "cyclocomp", "data.table",
+  "DBI", "Deriv", "desc", "devtools", "diffobj", "digest", "dipsaus",
+  "doBy", "doParallel", "downlit", "downloader", "dplyr", "DT",
+  "e1071", "edfReader", "ellipsis", "emmeans", "estimability",
+  "evaluate", "fansi", "farver", "fastmap", "fftwtools", "filearray",
+  "fontawesome", "foreach", "formatR", "Formula", "freesurferformats",
+  "fs", "fst", "fstcore", "futile.logger", "futile.options", "future",
+  "future.apply", "future.callr", "generics", "gert", "ggplot2",
+  "gh", "gifti", "gitcreds", "globals", "glue", "goodpractice",
+  "gsignal", "gtable", "hdf5r", "here", "highr", "hms", "htmltools",
+  "htmlwidgets", "httpuv", "httr", "httr2", "hunspell", "ieegio",
+  "ieegpipeline", "igraph", "imager", "ini", "IRdisplay", "IRkernel",
+  "isoband", "iterators", "jpeg", "jquerylib", "jsonlite", "knitr",
+  "labeling", "lambda.r", "later", "lazyeval", "learnr", "lifecycle",
+  "lintr", "listenv", "lme4", "lmerTest", "lmtest", "lobstr", "logger",
+  "magrittr", "markdown", "MatrixModels", "memoise", "microbenchmark",
+  "mime", "miniUI", "minqa", "modelr", "Morpho", "multitaper",
+  "munsell", "mvtnorm", "nanotime", "narray", "nloptr", "numDeriv",
+  "openssl", "oro.nifti", "pak", "parallelly", "pbdZMQ", "pbkrtest",
+  "pillar", "pkgbuild", "pkgconfig", "pkgdown", "pkgfilecache",
+  "pkgload", "pkgnet", "plyr", "png", "pracma", "praise", "prettyunits",
+  "processx", "profvis", "progress", "progressr", "promises", "proxy",
+  "ps", "purrr", "quantreg", "R.matlab", "R.methodsS3", "R.oo",
+  "R.utils", "r3js", "R6", "ragg", "rappdirs", "ravepipeline", "ravetools",
+  "rbibutils", "rcmdcheck", "RColorBrewer", "Rcpp", "RcppArmadillo",
+  "RcppCCTZ", "RcppEigen", "RcppTOML", "Rdpack", "readbitmap",
+  "readNSx", "reformulas", "rematch", "remotes", "renv", "repr",
+  "reprex", "reshape2", "reticulate", "rex", "rgl", "rhub", "rjson",
+  "rlang", "rmarkdown", "RNifti", "RNiftyReg", "roxygen2", "rprojroot",
+  "rpyANTs", "rpymat", "rstudioapi", "rutabaga", "Rvcg", "rversions",
+  "s2", "S7", "sass", "scales", "secretbase", "servr", "sessioninfo",
+  "sf", "shidashi", "shiny", "shinydashboard", "shinyFiles", "shinyjs",
+  "shinyvalidate", "shinyWidgets", "signal", "sourcetools", "SparseM",
+  "spelling", "startup", "stringi", "stringr", "sys", "systemfonts",
+  "targets", "testthat", "textshaping", "threeBrain", "tibble",
+  "tidyr", "tidyselect", "tiff", "tinytex", "units", "urlchecker",
+  "usethis", "utf8", "uuid", "vctrs", "viridisLite", "visNetwork",
+  "waldo", "waveslim", "whisker", "whoami", "withr", "wk", "xfun",
+  "xml2", "xmlparsedata", "xopen", "xtable", "yaml", "zip", "zoo"))
+
+install.packages(
+  c("ravemanager", "dipsaus", "filearray", "ieegio", "ravedash", "raveio", "ravepipeline",
+    "ravetools", "readNSx", "rpyANTs", "rpymat", "shidashi", "threeBrain"), 
+  repos = "https://rave-ieeg.r-universe.dev")
+
+ravemanager:::finalize_installation(async = FALSE, upgrade = "config-only")
+
+IRkernel::installspec(user = FALSE, sys_prefix=TRUE)
