@@ -4,8 +4,12 @@
 # Sys.setenv("R_RPYMAT_CONDA_PREFIX" = conda_env_path)
 # ravemanager::configure_python()
 
+
+Sys.setenv("R_RPYMAT_CONDA_EXE" = Sys.which("conda"))
+Sys.setenv("R_RPYMAT_CONDA_PREFIX" = "/srv/conda/envs/notebook")
+
 local({
-  
+
   # check if this is a dev env
   if(file.exists("~/.DS_Store")) {
     isdev <- TRUE
@@ -22,15 +26,16 @@ local({
       whoami <- "shared"
     }
   }
-  
+
   rave_root <- file.path(root_path, "RAVE")
-  
+
   config <- list(
     paths = list(
       root = rave_root,
       runtime = file.path(rave_root, "Runtime"),
-      data = file.path(rave_root, "rave_data", "data_dir"),
-      raw = file.path(rave_root, "rave_data", "raw_dir"),
+      data = file.path(rave_root, "Data", "Derivative"),
+      raw = file.path(rave_root, "Data", "Raw"),
+      bids = file.path(rave_root, "Data", "BIDS"),
       conda = conda_path
     ),
     conda = list(
@@ -40,7 +45,7 @@ local({
     ),
     threeBrain = list(
       ensure_templates = c(
-        # "cvs_avg35_inMNI152"
+        "cvs_avg35_inMNI152"
         # "N27"
       )
     ),
@@ -52,9 +57,9 @@ local({
       )
     )
   )
-  
+
   options(timeout = 3600)
-  
+
   init_paths <- function(config) {
     rave_root <- config$paths$root
     if( length(rave_root) != 1 || is.na(rave_root) ) {
@@ -63,9 +68,9 @@ local({
       stop("Cannot initialize RAVE root path at: ", rave_root, ". Please create this folder and restart this program.")
     }
     rave_root <- normalizePath(rave_root, mustWork = TRUE)
-    
+
     r_data_path <- normalizePath(file.path(rave_root, "UserPreferences", "shared", "data"), mustWork = FALSE)
-    
+
     conda_path <- config$paths$conda
     if(length(conda_path) != 1 || is.na(conda_path) || !nzchar(conda_path)) {
       conda_path <- Sys.which("conda")
@@ -79,93 +84,97 @@ local({
         }
       }
     }
-    
+
     conda_env_path <- file.path(r_data_path, "r-rpymat", "miniconda", "envs")
     conda_env_path <- normalizePath(conda_env_path, winslash = "/", mustWork = FALSE)
     conda_env_path <- gsub("[/]{0,}$", "/", conda_env_path)
-    
+
     # set R_user_dir & conda
     Sys.setenv(
       # data like pipeline templates can be shared
       R_USER_DATA_DIR = r_data_path,
-      
+
       # config and cache are user-specific
       R_USER_CONFIG_DIR = file.path(rave_root, "UserPreferences", whoami, "config"),
       R_USER_CACHE_DIR = file.path(rave_root, "UserPreferences", whoami, "cache"),
-      
+
       R_RPYMAT_CONDA_EXE = conda_path,
       R_RPYMAT_CONDA_PREFIX = conda_env_path
     )
-    
+
     config
   }
-  
+
   setup_rave <- function(config) {
     # rave_root <- "/Users/Shared/RAVE"
     rave_root <- normalizePath(config$paths$root, mustWork = TRUE)
     rave_runtime <- normalizePath(config$paths$runtime, mustWork = FALSE)
     rave_datadir <- normalizePath(config$paths$data, mustWork = FALSE)
     rave_rawdir <- normalizePath(config$paths$raw, mustWork = FALSE)
-    
+    rave_bidsdir <- normalizePath(config$paths$bids, mustWork = FALSE)
+
     # set cache & session dir
     ravepipeline <- asNamespace("ravepipeline")
+    # binder only has 1 core by default
+    ravepipeline$raveio_setopt(key = "max_worker", value = 1L)
     ravepipeline$raveio_setopt(key = "tensor_temp_path", value = file.path(rave_runtime, "shared"))
     ravepipeline$raveio_setopt(key = "ravedash_session_root", value = file.path(rave_runtime, "sessions", whoami))
-    
+
     # set data & raw dir
     ravepipeline$raveio_setopt(key = "data_dir", value = rave_datadir)
     ravepipeline$raveio_setopt(key = "raw_data_dir", value = rave_rawdir)
-    
+    ravepipeline$raveio_setopt(key = "bids_data_dir", value = rave_bidsdir)
+
     # set 3D viewer
     rave_viewerdir <- tools::R_user_dir("threeBrain", "data")
     if(!dir.exists(rave_viewerdir)) { dir.create(rave_viewerdir, recursive = TRUE) }
     options('threeBrain.template_dir' = normalizePath(rave_viewerdir, winslash = "/"))
-    
+
     for(subj in config$threeBrain$ensure_templates) {
       template_subjpath <- file.path(rave_viewerdir, subj)
       if(!dir.exists(template_subjpath)) {
         asNamespace('threeBrain')$download_template_subject(subject_code = subj, template_dir = rave_viewerdir)
       }
     }
-    
+
     # YAEL
     for(subj in config$rpyANTs$ensure_templates) {
-      template_path <- file.path(tools::R_user_dir(package = "rpyANTs", 
+      template_path <- file.path(tools::R_user_dir(package = "rpyANTs",
                                                    which = "data"), "templates", subj)
       if(!dir.exists(template_path)) {
         asNamespace("rpyANTs")$ensure_template(subj)
       }
     }
   }
-  
-  
+
+
   initialize_impl <- function() {
     initialized <- Sys.getenv("RAVE_INITIALIZED", unset = "")
     if( identical(initialized, "TRUE") ) { return() }
-    
+
     # source("renv/activate.R")
     Sys.setenv(RAVE_INITIALIZED = "TRUE")
-    
+
     # setup_path <- file.path(normalizePath(".", winslash = "/"), "renv", "rave-setup.rds")
     # config <- readRDS(setup_path)
-    
+
     init_paths(config)
-    
+
     # RAVE might be missing
-    
+
     tryCatch(
       {
-        
+
         setup_rave(config)
-        
+
         # gather information
         # print(R.version)
         py <- asNamespace("rpymat")$ensure_rpymat(verbose = FALSE)
-        
+
         ip <- asNamespace('dipsaus')$get_ip()
         ip <- ip$available[ip$available != "0.0.0.0"]
         ip <- ip[[length(ip)]]
-        
+
         cli <- asNamespace("cli")
         d <- cli$cli_div(theme = list(rule = list(
           color = "cyan",
@@ -188,7 +197,7 @@ local({
     )
   }
   initialize_impl()
-  
+
   invisible()
 })
 

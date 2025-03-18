@@ -20,3 +20,11 @@ install.packages("ravebuiltins", repos = repos, lib = libpath)
 
 threeBrain::threebrain_finalize_installation(upgrade = "config-only", async = FALSE)
 ravepipeline::ravepipeline_finalize_installation(upgrade = "config-only", async = FALSE)
+
+try({
+  startup_file <- "~/startup.R"
+  if(file.exists(startup_file)) {
+    source(startup_file)
+  }
+})
+
