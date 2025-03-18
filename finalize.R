@@ -120,11 +120,16 @@ setup_rave <- function(config) {
   rave_viewerdir <- tools::R_user_dir("threeBrain", "data")
   if(!dir.exists(rave_viewerdir)) { dir.create(rave_viewerdir, recursive = TRUE) }
   options('threeBrain.template_dir' = normalizePath(rave_viewerdir, winslash = "/"))
+  ravepipeline$raveio_setopt(key = "threeBrain_template_subject", value = "cvs_avg35_inMNI152")
 
   for(subj in config$threeBrain$ensure_templates) {
-    template_subjpath <- file.path(rave_viewerdir, subj)
+    template_subjpath <- file.path(rave_viewerdir, "templates", subj)
     if(!dir.exists(template_subjpath)) {
       asNamespace('threeBrain')$download_template_subject(subject_code = subj, template_dir = rave_viewerdir)
+      template_subjzip <- sprintf("%s.zip", template_subjpath)
+      if(file.exists(template_subjzip)) {
+        unlink(template_subjzip)
+      }
     }
   }
 

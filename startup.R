@@ -75,6 +75,10 @@ local({
     ravepipeline$raveio_setopt(key = "data_dir", value = rave_datadir)
     ravepipeline$raveio_setopt(key = "raw_data_dir", value = rave_rawdir)
     ravepipeline$raveio_setopt(key = "bids_data_dir", value = rave_bidsdir)
+
+    rave_viewerdir <- tools::R_user_dir("threeBrain", "data")
+    if(!dir.exists(rave_viewerdir)) { dir.create(rave_viewerdir, recursive = TRUE) }
+    options('threeBrain.template_dir' = normalizePath(rave_viewerdir, winslash = "/"))
   }
 
   initialize_impl <- function() {
