@@ -2,5 +2,8 @@
 
 /srv/conda/envs/notebook/bin/Rscript "finalize.R"
 
+rm -f .Rprofile
+mv Rprofile .Rprofile
+
 rm -rf /tmp/Rtmp*
 
