@@ -1,6 +1,14 @@
 #!/bin/bash
 
-R -e "install.packages(c('ravemanager', 'ieegio', 'ravedash', 'raveio', 'ravepipeline", 'readNSx', 'rpyANTs', 'rpymat', 'shidashi', 'threeBrain'), repos = 'https://rave-ieeg.r-universe.dev')"
+R -e 'install.packages("ravemanager", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("threeBrain", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("readNSx", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("rpymat", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("rpyANTs", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("ieegio", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("ravepipeline", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("raveio", repos = "https://rave-ieeg.r-universe.dev")'
+R -e 'install.packages("ravedash", repos = "https://rave-ieeg.r-universe.dev")'
 
 R -e 'threeBrain::threebrain_finalize_installation(upgrade = "config-only", async = FALSE)'
 R -e 'ravepipeline::ravepipeline_finalize_installation(upgrade = "config-only", async = FALSE)'
