@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rscript="/srv/conda/envs/notebook/bin/R" -e
-rscript_clean=$rscript --no-restore --no-save
+rscript="/srv/conda/envs/notebook/bin/R -e"
+rscript_clean="$rscript --no-restore --no-save"
 libpath="/srv/conda/envs/notebook/lib/R/library"
 
 $rscript_clean "install.packages(\"ravemanager\",repos=\"https://rave-ieeg.r-universe.dev\",lib=\"$libpath\")"
