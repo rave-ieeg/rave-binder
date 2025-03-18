@@ -7,6 +7,8 @@ repos <- c(
   "rave-ieeg" = "https://rave-ieeg.r-universe.dev"
 )
 
+# incompatible issue with Matrix
+install.packages("lme4", lib = libpath)
 install.packages("ravemanager", repos = repos, lib = libpath)
 install.packages("threeBrain", repos = repos, lib = libpath)
 install.packages("readNSx", repos = repos, lib = libpath)
